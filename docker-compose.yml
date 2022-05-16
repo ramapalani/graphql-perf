@@ -18,3 +18,9 @@ services:
     build: ./subgraph1
     ports:
       - "8080:8080"
+  ab-perf-test:
+    container_name: ab-perf-test
+    build: ./perftest
+    environment: 
+      - CONCURRENT_USERS=100
+      - NUMBER_OF_REQUESTS=1000

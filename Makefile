@@ -6,12 +6,14 @@ demo: docker-up smoke docker-down
 
 .PHONY: docker-up
 docker-up:
-	docker-compose up -d
+	docker-compose up -d --build
 	@sleep 2
 	@docker logs apollo-gateway
 	@sleep 2
 	@echo -------------
 	@docker logs subgraph1
+	@echo -------------
+	@echo docker logs -f ab-perf-test
 	@echo -------------
 
 .PHONY: smoke
