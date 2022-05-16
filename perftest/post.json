@@ -1,3 +1,4 @@
 {
-    "query":"query {\n  shows {\n    id\n    title\n  }\n}"
+    "query":"query get_all {\n  shows {\n    id\n    title\n   reviews {\n      username\n      starScore\n    }\n  }\n}",
+    "operationName":"get_all"
 }

@@ -31,13 +31,13 @@ public class ShowsDataFetcher {
     public List<Show> shows(@InputArgument(collectionType = String.class) Optional<String> titleFilter,
                             DgsDataFetchingEnvironment dfe,
                             @RequestHeader(name= Constants.X_LATENCY, defaultValue = Constants.DEFAULT_LATENCY)String latency) {
-        //Debug
-        DgsRequestData requestData = dfe.getDgsContext().getRequestData();
-        HttpHeaders httpHeaders = requestData.getHeaders();
-        logger.info("Print all request headers");
-        httpHeaders.entrySet().stream().forEach(entry -> {
-            logger.info (entry.getKey() + "=" + Arrays.toString(entry.getValue().toArray()));
-        });
+        // //Debug
+        // DgsRequestData requestData = dfe.getDgsContext().getRequestData();
+        // HttpHeaders httpHeaders = requestData.getHeaders();
+        // logger.info("Print all request headers");
+        // httpHeaders.entrySet().stream().forEach(entry -> {
+        //     logger.info (entry.getKey() + "=" + Arrays.toString(entry.getValue().toArray()));
+        // });
         int addLatencyInMs = Integer.parseInt(latency);
         if (titleFilter.isPresent()) {
             return showService

@@ -22,5 +22,7 @@ services:
     container_name: ab-perf-test
     build: ./perftest
     environment: 
-      - CONCURRENT_USERS=100
+      - CONCURRENT_USERS=10
       - NUMBER_OF_REQUESTS=1000
+      # Add synthetic latency in ms
+      - SYNTHETIC_LATENCY=100
