@@ -1,0 +1,53 @@
+schema @core(feature: "https://specs.apollo.dev/core/v0.1") @core(feature: "https://specs.apollo.dev/join/v0.1") @apollo_studio_metadata(launchId: "32b7ab4b-4f43-4708-b1a1-318a19cc1f6a", buildId: "32b7ab4b-4f43-4708-b1a1-318a19cc1f6a", checkId: null) {
+  query: Query
+  mutation: Mutation
+}
+
+directive @core(feature: String!) repeatable on SCHEMA
+
+directive @join__field(graph: join__Graph, requires: join__FieldSet, provides: join__FieldSet) on FIELD_DEFINITION
+
+directive @join__type(graph: join__Graph!, key: join__FieldSet) repeatable on OBJECT | INTERFACE
+
+directive @join__owner(graph: join__Graph!) on OBJECT | INTERFACE
+
+directive @join__graph(name: String!, url: String!) on ENUM_VALUE
+
+scalar DateTime
+
+scalar join__FieldSet
+
+enum join__Graph {
+  SUBGRAPH1 @join__graph(name: "subgraph1", url: "http://subgraph1:8080/graphql")
+}
+
+type Mutation {
+  addReview(review: SubmittedReview): Review @join__field(graph: SUBGRAPH1)
+  addReviews(reviews: [SubmittedReview]): [Review] @join__field(graph: SUBGRAPH1)
+}
+
+type Query {
+  shows(titleFilter: String): [Show] @join__field(graph: SUBGRAPH1)
+  show(id: ID!): Show @join__field(graph: SUBGRAPH1)
+}
+
+type Review {
+  username: String
+  starScore: Int
+  submittedDate: DateTime
+}
+
+type Show @join__owner(graph: SUBGRAPH1) @join__type(graph: SUBGRAPH1, key: "id") {
+  id: ID! @join__field(graph: SUBGRAPH1)
+  title: String @join__field(graph: SUBGRAPH1)
+  releaseYear: Int @join__field(graph: SUBGRAPH1)
+  reviews: [Review] @join__field(graph: SUBGRAPH1)
+}
+
+input SubmittedReview {
+  showId: ID!
+  username: String!
+  starScore: Int!
+}
+
+directive @apollo_studio_metadata(launchId: String, buildId: String, checkId: String) on SCHEMA

@@ -1,0 +1,32 @@
+# You must include this definition in any schema with tags!
+directive @tag(
+    name: String!
+) on FIELD_DEFINITION | INTERFACE | OBJECT | UNION
+
+type Show @key(fields: "id") {
+    id: ID!
+    title: String
+    releaseYear: Int @tag(name: "experimental")
+    reviews: [Review]
+}
+
+type Review {
+    username: String
+    starScore: Int @tag(name: "admin")
+}
+
+input SubmittedReview {
+    showId: ID!
+    username: String!
+    starScore: Int!
+}
+
+type Query {
+    shows(titleFilter: String): [Show]
+    show(id: ID!): Show
+}
+
+type Mutation {
+    addReview(review: SubmittedReview): Review
+    addReviews(reviews: [SubmittedReview]): [Review]
+}

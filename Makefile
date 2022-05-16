@@ -1,0 +1,27 @@
+.PHONY: default
+default: all
+
+.PHONY: all
+demo: docker-up smoke docker-down
+
+.PHONY: docker-up
+docker-up:
+	docker-compose up -d
+	@sleep 2
+	@docker logs apollo-gateway
+	@sleep 2
+	@echo -------------
+	@docker logs subgraph1
+	@echo -------------
+
+.PHONY: smoke
+smoke:
+	@scripts/smoke.sh
+
+.PHONY: docker-down
+docker-down:
+	docker-compose down --remove-orphans
+
+.PHONY: graph-api-env
+graph-api-env:
+	@scripts/graph-api-env.sh

@@ -1,0 +1,20 @@
+version: '3'
+services:
+  apollo-gateway:
+    container_name: apollo-gateway
+    build: ./gateway
+    # For Apollo's managed federation use graph-api and
+    # comment out embedded schema in environment and volumes
+    # env_file: # create with make graph-api-env
+    #   - graph-api.env
+    environment:
+      - APOLLO_SCHEMA_CONFIG_EMBEDDED=true
+    volumes:
+      - ./supergraph.graphql:/etc/config/supergraph.graphql
+    ports:
+      - "4000:4000"
+  subgraph1:
+    container_name: subgraph1
+    build: ./subgraph1
+    ports:
+      - "8080:8080"
