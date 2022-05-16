@@ -3,6 +3,7 @@ services:
   apollo-gateway:
     container_name: apollo-gateway
     build: ./gateway
+    # image: ramapalaniappan436/apollo-gateway:0.42.0
     # For Apollo's managed federation use graph-api and
     # comment out embedded schema in environment and volumes
     # env_file: # create with make graph-api-env
@@ -16,11 +17,13 @@ services:
   subgraph1:
     container_name: subgraph1
     build: ./subgraph1
+    # image: ramapalaniappan436/subgraph1:latest
     ports:
       - "8080:8080"
   ab-perf-test:
     container_name: ab-perf-test
     build: ./perftest
+    # image: ramapalaniappan436/ab-perf-test:latest
     environment: 
       - CONCURRENT_USERS=10
       - NUMBER_OF_REQUESTS=1000
