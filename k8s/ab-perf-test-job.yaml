@@ -4,18 +4,29 @@ metadata:
   name: ab-perf-test
 spec:
   template:
+    metadata:
+      labels:
+        app: ab-perf-test
     spec:
       containers:
       - name: ab-perf-test
-        image: ramapalaniappan436/ab-perf-test:latest
+        # image: ramapalaniappan436/ab-perf-test:latest
+        image: docker.intuit.com/api-management/rapidxgqlrouter/service/rp/ab-perf-test:latest
         env:
         - name: CONCURRENT_USERS
-          value: '10'
-        - name: NUMBER_OF_REQUESTS
-          value: '1000'
-        - name: SYNTHETIC_LATENCY
           value: '100'
+        - name: NUMBER_OF_REQUESTS
+          value: '10000'
+        - name: SYNTHETIC_LATENCY
+          value: '5000'
         - name: URL
           value: http://apollo-gateway:4000/graphql
+        resources:
+          requests:
+            cpu: "4"
+            memory: "8Gi"
+          limits:
+            cpu: "4"
+            memory: "8Gi"
       restartPolicy: Never
   backoffLimit: 4

@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
       - name: subgraph1
-        image: ramapalaniappan436/subgraph1:latest
+        # image: ramapalaniappan436/subgraph1:latest
+        image: docker.intuit.com/api-management/rapidxgqlrouter/service/rp/subgraph1:latest
         ports:
           - containerPort: 8080
             name: subgraph1
