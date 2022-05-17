@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: subgraph1
+  labels:
+    app: subgraph1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: subgraph1
+  template:
+    metadata:
+      labels:
+        app: subgraph1
+    spec:
+      containers:
+      - name: subgraph1
+        image: ramapalaniappan436/subgraph1:latest
+        ports:
+          - containerPort: 8080
+            name: subgraph1
+            protocol: TCP
+        resources:
+          requests:
+            cpu: "5"
+            memory: "7Gi"
+          limits:
+            cpu: "6"
+            memory: "8Gi"

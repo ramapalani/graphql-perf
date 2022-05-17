@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ab-perf-test
+spec:
+  template:
+    spec:
+      containers:
+      - name: ab-perf-test
+        image: ramapalaniappan436/ab-perf-test:latest
+        env:
+        - name: CONCURRENT_USERS
+          value: '10'
+        - name: NUMBER_OF_REQUESTS
+          value: '1000'
+        - name: SYNTHETIC_LATENCY
+          value: '100'
+        - name: URL
+          value: http://apollo-gateway:4000/graphql
+      restartPolicy: Never
+  backoffLimit: 4

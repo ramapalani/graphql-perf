@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apollo-gateway
+  labels:
+    app: apollo-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apollo-gateway
+  template:
+    metadata:
+      labels:
+        app: apollo-gateway
+    spec:
+      containers:
+      - name: apollo-gateway
+        image: ramapalaniappan436/apollo-gateway:0.42.0
+        ports:
+          - containerPort: 4000
+            name: apollo-gateway
+            protocol: TCP
+        readinessProbe:
+          initialDelaySeconds: 60
+          periodSeconds: 5
+          successThreshold: 2
+          timeoutSeconds: 2
+          failureThreshold: 3
+          httpGet:
+            path: /.well-known/apollo/server-health
+            port: 4000
+            scheme: HTTP
+        resources:
+          requests:
+            cpu: "1.5"
+            memory: "3Gi"
+          limits:
+            cpu: "2"
+            memory: "4Gi"
+        env:
+        - name: APOLLO_SCHEMA_CONFIG_EMBEDDED
+          value: 'true'
+        volumeMounts:
+        - name: supergraph
+          mountPath: /etc/config
+      volumes:
+        - name: supergraph
+          configMap:
+            name: supergraph
