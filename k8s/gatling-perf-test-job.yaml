@@ -18,11 +18,11 @@ spec:
         - name: MIN_USER_COUNT
           value: '1'
         - name: TEST_RAMP_SECONDS
-          value: '1'
+          value: '60'
         - name: TOTAL_TPS
           value: '1'
         - name: TEST_DURATION_SECONDS
-          value: '1'
+          value: '600'
         - name: SINGLE_SUBGRAPH_100KB_LATENCY_MILLISECONDS
           value: '100'
         resources:

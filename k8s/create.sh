@@ -9,15 +9,21 @@ kubectl apply -f gateway-service.yaml -f subgraph1-service.yaml
 
 kubectl get deployments,pods,services,configmap
 
-set -x
-sleep 30
-set +x
+#Wait for apollo-gateway pod to be ready
+printf "Waiting for pod " 
+while [[ $(kubectl get pods -l app=apollo-gateway -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; 
+do 
+    printf '.'
+    sleep 1
+done
+echo Pod Ready
+kubectl get pods -l app=apollo-gateway
 
 # Run Gatling Perf test
-kubectl delete -f gatling-perf-test-job.yaml; kubectl apply -f gatling-perf-test-job.yaml
+# kubectl delete -f gatling-perf-test-job.yaml; kubectl apply -f gatling-perf-test-job.yaml
 
-job=$(kubectl get pods -l job-name=gatling-perf-test --field-selector=status.phase=Running --output=jsonpath='{.items[*].metadata.name}')
-kubectl logs -f $job
+# job=$(kubectl get pods -l job-name=gatling-perf-test --field-selector=status.phase=Running --output=jsonpath='{.items[*].metadata.name}')
+# kubectl logs -f $job
 
 
 # Run Apache Benchmark test
