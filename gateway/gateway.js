@@ -52,6 +52,9 @@ startGcStats()
 const { ApolloServer } = require('apollo-server');
 const { ApolloGateway } = require('@apollo/gateway');
 const { RemoteGraphQLDataSource } = require('@apollo/gateway');
+const { readFileSync } = require('fs');
+const { Request } = require ('express');
+require('console-stamp')(console);
 
 const port = process.env.APOLLO_PORT || 4000;
 const embeddedSchema = process.env.APOLLO_SCHEMA_CONFIG_EMBEDDED == "true" ? true : false;
@@ -82,6 +85,24 @@ class CustomDataSource extends RemoteGraphQLDataSource {
 
 const gateway = new ApolloGateway(config);
 
+const loggingPlugin = {
+  // Fires whenever a GraphQL request is received from a client.
+  async requestDidStart(requestContext) {
+    const startTime = process.hrtime();
+
+    return {
+      async willSendResponse(requestContext) {
+        if (requestContext.operationName == "IntrospectionQuery") {
+          return;
+        }
+        const requestHrTime = process.hrtime(startTime)
+        const requestExecutionTime = requestHrTime[0] * 1000 + requestHrTime[1] / 1000000
+        console.log("operationName="+requestContext.operationName + ", elapsedTime="+requestExecutionTime);
+      }
+    }
+  },
+};
+
 const server = new ApolloServer({
   gateway,
   debug: true,
@@ -93,6 +114,9 @@ const server = new ApolloServer({
       },
     },
   }),
+  plugins: [
+    loggingPlugin
+  ],
   // Subscriptions are unsupported but planned for a future Gateway version.
   subscriptions: false
 });

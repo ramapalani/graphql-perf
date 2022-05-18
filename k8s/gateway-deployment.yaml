@@ -17,7 +17,7 @@ spec:
       containers:
       - name: apollo-gateway
         # image: ramapalaniappan436/apollo-gateway:0.42.0
-        image: docker.intuit.com/api-management/rapidxgqlrouter/service/rp/apollo-gateway:0.42.0
+        image: docker.intuit.com/api-management/rapidxgqlrouter/service/rp/apollo-gateway:latest
         ports:
           - containerPort: 4000
             name: apollo-gateway
