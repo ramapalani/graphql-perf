@@ -13,12 +13,45 @@ if (process.env.APOLLO_OTEL_EXPORTER_TYPE) {
   }).setupInstrumentation();
 }
 
+// Prometheus
+const express = require('express')
+const http = require('http')
+const https = require('https')
+const promClient = require('prom-client')
+const { readFileSync } = require('fs');
+const gcStats = require('prometheus-gc-stats')
+
+const metricApp = express()
+metricApp.use('/actuator/prometheus', async (req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' })
+  res.end(promClient.register.metrics())
+})
+
+let metricServer
+if (process.env.SSL_ENABLED) {
+  metricServer = https.createServer(
+    {
+      key: readFileSync(process.env.SSL_KEY_PATH),
+      cert: readFileSync(process.env.SSL_CERT_PATH)
+    },
+    metricApp
+  )
+} else {
+  metricServer = http.createServer(metricApp)
+}
+
+metricServer.listen(8490, () => {
+  console.info(`Metrics server listening on ${8490}`)
+})
+
+promClient.collectDefaultMetrics()
+const startGcStats = gcStats(promClient.register)
+startGcStats()
+
 // Main
 const { ApolloServer } = require('apollo-server');
 const { ApolloGateway } = require('@apollo/gateway');
 const { RemoteGraphQLDataSource } = require('@apollo/gateway');
-const { readFileSync } = require('fs');
-const { Request } = require ('express');
 
 const port = process.env.APOLLO_PORT || 4000;
 const embeddedSchema = process.env.APOLLO_SCHEMA_CONFIG_EMBEDDED == "true" ? true : false;
@@ -67,3 +100,4 @@ const server = new ApolloServer({
 server.listen( {port: port} ).then(({ url }) => {
   console.log(`🚀 Graph Router ready at ${url}`);
 }).catch(err => {console.error(err)});
+

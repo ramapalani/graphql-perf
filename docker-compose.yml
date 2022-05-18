@@ -14,6 +14,7 @@ services:
       - ./supergraph.graphql:/etc/config/supergraph.graphql
     ports:
       - "4000:4000"
+      - "8490:8490"
   subgraph1:
     container_name: subgraph1
     build: ./subgraph1
