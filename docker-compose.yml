@@ -30,14 +30,14 @@ services:
   #     - NUMBER_OF_REQUESTS=1000
   #     # Add synthetic latency in ms
   #     - SYNTHETIC_LATENCY=100
-  # gatling-perf-test:
-  #   container_name: gatling-perf-test
-  #   build: ./gatling-perf-test
-  #   # image: ramapalaniappan436/gatling-perf-test:latest
-  #   environment: 
-  #     - GRAPHQL_URL=http://apollo-gateway:4000/graphql
-  #     - MIN_USER_COUNT=1
-  #     - TEST_RAMP_SECONDS=1
-  #     - TOTAL_TPS=1
-  #     - TEST_DURATION_SECONDS=60
-  #     - SINGLE_SUBGRAPH_100KB_LATENCY_MILLISECONDS=100
+  gatling-perf-test:
+    container_name: gatling-perf-test
+    build: ./gatling-perf-test
+    # image: ramapalaniappan436/gatling-perf-test:latest
+    environment: 
+      - GRAPHQL_URL=http://apollo-gateway:4000/graphql
+      - MIN_USER_COUNT=1
+      - TEST_RAMP_SECONDS=1
+      - TOTAL_TPS=1
+      - TEST_DURATION_SECONDS=60
+      - SINGLE_SUBGRAPH_100KB_LATENCY_MILLISECONDS=100
