@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
 
+import static common.ConfigResolver.BASE_URL;
 import static io.gatling.javaapi.core.CoreDsl.StringBody;
 import static io.gatling.javaapi.http.HttpDsl.http;
 import static io.gatling.javaapi.http.HttpDsl.status;
@@ -21,7 +22,7 @@ public class HttpRunner {
     private static final Logger logger = LoggerFactory.getLogger(HttpRunner.class);
 
     public static HttpProtocolBuilder httpProtocol = http
-            .baseUrl("http://localhost:4000")
+            .baseUrl(BASE_URL)
             .header("Content-Type", "application/json");
 
     public static HttpRequestActionBuilder getHttpPostBuilder(String requestName, String requestBody) {

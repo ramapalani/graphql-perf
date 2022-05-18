@@ -32,12 +32,12 @@ services:
   #     - SYNTHETIC_LATENCY=100
   gatling-perf-test:
     container_name: gatling-perf-test
-    build: ./gatling-perf-test
+    build: ./gatling-perf-test  
     # image: ramapalaniappan436/gatling-perf-test:latest
     environment: 
-      - GRAPHQL_URL=http://apollo-gateway:4000/graphql
+      - "BASE_URL=http://apollo-gateway:4000"
       - MIN_USER_COUNT=1
       - TEST_RAMP_SECONDS=1
       - TOTAL_TPS=1
-      - TEST_DURATION_SECONDS=60
+      - TEST_DURATION_SECONDS=1
       - SINGLE_SUBGRAPH_100KB_LATENCY_MILLISECONDS=100

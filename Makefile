@@ -13,7 +13,7 @@ docker-up:
 	@echo -------------
 	@docker logs subgraph1
 	@echo -------------
-	@echo docker logs -f ab-perf-test
+	@echo docker logs -f gatling-perf-test
 	@echo -------------
 
 .PHONY: smoke
