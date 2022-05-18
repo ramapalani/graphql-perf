@@ -18,7 +18,6 @@ const express = require('express')
 const http = require('http')
 const https = require('https')
 const promClient = require('prom-client')
-const { readFileSync } = require('fs');
 const gcStats = require('prometheus-gc-stats')
 
 const metricApp = express()
