@@ -1,3 +1,6 @@
+# Performance Benchmark
+* [100KB Payload](./report/gateway/apollo-gateway-100kb.MD)
+
 # Run Locally
 
 Pre-Req
@@ -20,7 +23,7 @@ docker pull ramapalaniappan436/subgraph1:latest
 docker pull ramapalaniappan436/ab-perf-test:latest
 ```
 
-# Run Apache Benchmark Test
+<details><summary>Run Apache Benchmark Test</summary>
 
 Tweak these environment variable in ab-perf-test container to run a different load
 ```
@@ -33,4 +36,22 @@ NUMBER_OF_REQUESTS=1000
 # Add synthetic latency to subgraph response
 # Value in millisecond
 SYNTHETIC_LATENCY=100
+```
+</details>
+
+# Run in Kubernetes
+
+Pre-Req
+* kubectl
+* Access to a Kubernetes Namespace and able to create these objects: deployment, pod, service, job and configmap
+
+```
+# Deletes all Kubernetes objects that this project created
+./k8s/cleanup.sh
+
+# Creates apollo-gateway, subgraph and wait till the apollo-gateway pod is ready
+./k8s/create.sh
+
+# Runs a Gatling perf test 
+./k8s/perf.sh
 ```

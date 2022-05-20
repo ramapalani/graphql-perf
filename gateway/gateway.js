@@ -96,7 +96,8 @@ const loggingPlugin = {
         }
         const requestHrTime = process.hrtime(startTime)
         const requestExecutionTime = requestHrTime[0] * 1000 + requestHrTime[1] / 1000000
-        console.log("operationName="+requestContext.operationName + ", elapsedTime="+requestExecutionTime);
+        const currentTimeInMilliseconds=Date.now();
+        console.log("epoch="+currentTimeInMilliseconds + ", operationName="+requestContext.operationName + ", elapsedTime="+requestExecutionTime);
       }
     }
   },

@@ -14,7 +14,7 @@ public class ConfigResolver {
     // Configs used for setting the load percentage for different test scenarios
     public static final Double TOTAL_TPS = Double.parseDouble(System.getProperty("TOTAL_TPS", "20"));
     // If GLOBAL_LATENCY_MILLISECONDS is set to a value greater than zero, it will take precedence over other read latencies defined as per the payload size
-    public static final Integer GLOBAL_LATENCY_MILLISECONDS = Integer.valueOf(System.getProperty("GLOBAL_LATENCY_MILLISECONDS", "100"));
+    public static final Integer GLOBAL_LATENCY_MILLISECONDS = Integer.valueOf(System.getProperty("GLOBAL_LATENCY_MILLISECONDS", "0"));
     public static final Integer SINGLE_SUBGRAPH_100KB_LATENCY_MILLISECONDS = Integer.valueOf(System.getProperty("SINGLE_SUBGRAPH_100KB_LATENCY_MILLISECONDS", "0"));
     public static  final Double SINGLE_SUBGRAPH_100KB_LOAD_PERCENTAGE = Double.parseDouble(System.getProperty("SINGLE_SUBGRAPH_100KB_LOAD_PERCENTAGE", "100")) * 0.01d;
     public static  final Double SINGLE_SUBGRAPH_100KB_TPS = TOTAL_TPS * SINGLE_SUBGRAPH_100KB_LOAD_PERCENTAGE;

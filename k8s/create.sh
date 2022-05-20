@@ -1,29 +1,29 @@
 #!/bin/bash
 
+export DIR=`dirname $0`
+
 # export KUBECONFIG=xxx
 # cd k8s
 # Deploy Supergraph and Subgraph
-kubectl create configmap supergraph --from-file=../supergraph.graphql
-kubectl apply -f gateway-deployment.yaml -f subgraph1-deployment.yaml
-kubectl apply -f gateway-service.yaml -f subgraph1-service.yaml
+kubectl create configmap supergraph --from-file=$DIR/../supergraph.graphql
+cat $DIR/gateway-deployment.yaml | kubectl apply -f -
+cat $DIR/subgraph1-deployment.yaml | kubectl apply -f -
+cat $DIR/gateway-service.yaml | kubectl apply -f -
+cat $DIR/subgraph1-service.yaml | kubectl apply -f -
 
 kubectl get deployments,pods,services,configmap
 
 #Wait for apollo-gateway pod to be ready
-printf "Waiting for pod " 
+printf "Waiting for apollo-gateway pod to be ready " 
 while [[ $(kubectl get pods -l app=apollo-gateway -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; 
 do 
     printf '.'
     sleep 1
 done
-echo Pod Ready
+echo "Pod Ready"
 kubectl get pods -l app=apollo-gateway
 
-# Run Gatling Perf test
-# kubectl delete -f gatling-perf-test-job.yaml; kubectl apply -f gatling-perf-test-job.yaml
-
-# job=$(kubectl get pods -l job-name=gatling-perf-test --field-selector=status.phase=Running --output=jsonpath='{.items[*].metadata.name}')
-# kubectl logs -f $job
+# $DIR/perf.sh gatling-perf-test-job.yaml
 
 
 # Run Apache Benchmark test
