@@ -24,8 +24,8 @@ spec:
             protocol: TCP
         resources:
           requests:
-            cpu: "5"
-            memory: "7Gi"
+            cpu: "4"
+            memory: "14Gi"
           limits:
-            cpu: "6"
-            memory: "8Gi"
+            cpu: "5"
+            memory: "16Gi"

@@ -38,3 +38,16 @@ More details are in this page: [Perf Setup](./perf-test-setup.MD)
 | 76 | 100 | 3402 | 2150 | 582 | 1568 | 1250 | 249 | [76tps-time.png](./100msLatency/76tps-time.png) \| [76tps-sys.png](./100msLatency/76tps-sys.png)
 | 78 | 100 | 3829 | 2467 | 677 | 1790 | 1260 | 246 | [78tps-time.png](./100msLatency/78tps-time.png) \| [78tps-sys.png](./100msLatency/78tps-sys.png)
 
+
+## Synthetic Latency of 5s
+
+| Transactions Per Second  | Client Response Time P95 (ms) | Supergraph Response Time P95 (ms) | Subgraph Response Time P95 (ms) | Time spent in Supergraph (ms) | CPU (millicore) | Memory (MB) | Screenshot |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | 5067 | 5062 | 5049 | 13 | 29 | 85 | |
+| 2 | 5062 | 5057 | 5045 | 12 | 52 | 87 | |
+| 4 | 5059 | 5055 | 5043 | 12 | 98 | 90 | |
+| 8 | 5056 | 5052 | 5041 | 11 | 187 | 111 | |
+| 16 | 5054 | 5050 | 5039 | 11 | 308 | 160 | |
+| 32 | 5062 | 5056 | 5040 | 16 | 564 | 181 | |
+| 64 | failed | - | - | - | - | - | |
+| 48 | 13233 | 9729 | 6394 | 3335 | 849 | 341 | |
