@@ -56,6 +56,8 @@ More details are in this page: [Perf Setup](./perf-test-setup.MD)
 * For this request, Apollo Gateway is CPU bound
 
 ### Test Result
+![Response Time](./5000msLatency/ResponseTime100kb5s.png)
+
 | Transactions Per Second  | Client Response Time P95 (ms) | Supergraph Response Time P95 (ms) | Subgraph Response Time P95 (ms) | Time spent in Supergraph (ms) | CPU (millicore) | Memory (MB) | Screenshot |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1 | 5067 | 5062 | 5049 | 13 | 29 | 85 | [1tps-time.png](./5000msLatency/1tps-time.png), [1tps-sys.png](./5000msLatency/1tps-sys.png)|
