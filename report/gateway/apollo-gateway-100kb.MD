@@ -1,9 +1,28 @@
 # Apollo-Gateway 100KB Response Payload Perf Results
 
 ## Perf Setup
-[Perf Setup](./perf-test-setup.MD)
+* Response Payload = 100kb
+More details are in this page: [Perf Setup](./perf-test-setup.MD)
 
-## Summary
+## Synthetic Latency of 100ms
+
+* Max TPS that could be achieved for this load is 78 transactions per second (TPS).
+* Supergraph scales well without any degration till 32 TPS.  
+* Time spent in the supergraph(supergraph time - subgraph time)
+  * <=32 TPS: 10-12 ms
+  * 32 < TPS >= 78: 353-1790ms (upto 2.6x more than the time spent in subgraph)
+
+* System metrics CPU and Memory didn't breach the "request" values provided.
+
+| System Metric | Max Usage in test | Request Value | Limit Value |
+| --- | --- | --- | --- |
+| CPU (millicore)| 1260 | 1500 | 2000 |
+| Memory (MB) | 246 | 3000M | 4000M |
+
+
+
+![Response Time](./100msLatency/ResponseTime100kb100ms.png)
+
 | Transactions Per Second | Synthetic Latency | Client Response Time P95 (ms) | Supergraph Response Time P95 (ms) | Subgraph Response Time P95 (ms) | Time spent in Supergraph (ms) | CPU (millicore) | Memory (MB) | Screenshot |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1 | 100 | 165 | 160 | 148 | 12 | 25 | 80 | [1tps-time.png](./100msLatency/1tps-time.png) \| [1tps-sys.png](./100msLatency/1tps-sys.png)
