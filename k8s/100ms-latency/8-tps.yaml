@@ -1,0 +1,37 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: gatling-perf-test
+spec:
+  template:
+    metadata:
+      labels:
+        app: gatling-perf-test
+    spec:
+      containers:
+      - name: gatling-perf-test
+        # image: ramapalaniappan436/gatling-perf-test:latest
+        image: docker.intuit.com/api-management/rapidxgqlrouter/service/rp/gatling-perf-test:latest
+        env:
+        - name: BASE_URL
+          value: http://apollo-gateway:4000
+        - name: MIN_USER_COUNT
+          value: '1'
+        - name: TEST_RAMP_SECONDS
+          value: '60'
+        - name: TOTAL_TPS
+          value: '8'
+        - name: TEST_DURATION_SECONDS
+          value: '600'
+        - name: SINGLE_SUBGRAPH_100KB_LATENCY_MILLISECONDS
+          value: '100'
+        resources:
+          requests:
+            cpu: "4"
+            memory: "8Gi"
+          limits:
+            cpu: "4"
+            memory: "8Gi"
+      restartPolicy: Never
+  backoffLimit: 4
+  
