@@ -1,0 +1,30 @@
+version: '3'
+services:
+  apollo-router:
+    container_name: apollo-router
+    build: ./router
+    # image: ramapalaniappan436/apollo-router:0.42.0
+    volumes:
+      - ./supergraph.graphql:/etc/config/supergraph.graphql
+      - ./router/router.yaml:/dist/config/router.yaml
+    ports:
+      - "4000:4000"
+  subgraph1:
+    container_name: subgraph1
+    build: ./subgraph1
+    # image: ramapalaniappan436/subgraph1:latest
+    ports:
+      - "8080:8080"
+  gatling-perf-test:
+    container_name: gatling-perf-test
+    # build: ./gatling-perf-test  
+    # image: ramapalaniappan436/gatling-perf-test:latest
+    image: docker.intuit.com/api-management/rapidxgqlrouter/service/rp/gatling-perf-test:debug
+    environment: 
+      - "BASE_URL=http://apollo-router:4000"
+      - "GRAPH_URI=\"\"" # No URI for router
+      - MIN_USER_COUNT=1
+      - TEST_RAMP_SECONDS=1
+      - TOTAL_TPS=1
+      - TEST_DURATION_SECONDS=1
+      - SINGLE_SUBGRAPH_100KB_LATENCY_MILLISECONDS=100
