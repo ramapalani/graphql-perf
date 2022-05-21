@@ -7,6 +7,7 @@ package common;
  */
 public class ConfigResolver {
     public static final String BASE_URL = System.getProperty("BASE_URL", "http://apollo-gateway:4000");
+    public static final String GRAPH_URI = System.getProperty("GRAPH_URI", "/graphql");
     public static final Integer MIN_USER_COUNT = Integer.valueOf(System.getProperty("MIN_USER_COUNT", "1"));
     public static final Integer TEST_RAMP_SECONDS = Integer.valueOf(System.getProperty("TEST_RAMP_SECONDS", "1"));
     public static final Integer TEST_DURATION_SECONDS = Integer.valueOf(System.getProperty("TEST_DURATION_SECONDS", "1"));

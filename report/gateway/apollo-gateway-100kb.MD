@@ -42,7 +42,7 @@ More details are in this page: [Perf Setup](./perf-test-setup.MD)
 ## Synthetic Latency of 5s
 
 * Max TPS that could be achieved for this load is 58 transactions per second (TPS).
-* Supergraph scales well without any degration till 32 TPS.  
+* Supergraph scales well without much degration till 32 TPS.  
 * Time spent in the supergraph(supergraph time - subgraph time)
   * <=32 TPS: 11-16 ms
   * 32 < TPS >= 58: 3s-5s (upto 2x more than the time spent in subgraph)

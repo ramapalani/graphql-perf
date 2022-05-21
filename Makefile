@@ -27,3 +27,8 @@ docker-down:
 .PHONY: graph-api-env
 graph-api-env:
 	@scripts/graph-api-env.sh
+
+.PHONY: docker-up-router
+docker-up-router:
+	docker-compose -f docker-compose-router.yml up -d --build
+

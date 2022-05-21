@@ -19,7 +19,9 @@ public class BasicSimulation extends Simulation {
                   latency));
   {
           System.out.println("************ base_url=" + BASE_URL);
+          System.out.println("************ graph_uri='" + GRAPH_URI+"'");
           System.out.println("************ synthetic latency=" + latency);
+
     setUp(scn.injectOpen(
             rampUsersPerSec(MIN_USER_COUNT)
                     .to(SINGLE_SUBGRAPH_100KB_TPS)

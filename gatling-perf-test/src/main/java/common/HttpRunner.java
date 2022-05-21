@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import java.time.Duration;
 
 import static common.ConfigResolver.BASE_URL;
+import static common.ConfigResolver.GRAPH_URI;
 import static io.gatling.javaapi.core.CoreDsl.StringBody;
 import static io.gatling.javaapi.http.HttpDsl.http;
 import static io.gatling.javaapi.http.HttpDsl.status;
@@ -31,7 +32,7 @@ public class HttpRunner {
 
     public static HttpRequestActionBuilder getHttpPostBuilder(String requestName, String requestBody, Integer latency) {
         return http(requestName)
-                .post("/graphql")
+                .post(GRAPH_URI)
                 .requestTimeout(Duration.ofMillis(600000))
                 .header("x_latency", latency != null ? latency.toString() : "0")
                 .body(StringBody(requestBody))

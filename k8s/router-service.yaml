@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: apollo-router
+  labels:
+    iks-metric: actuator-prometheus
+spec:
+  selector:
+    app: apollo-router
+  ports:
+    - name: supergraph
+      protocol: TCP
+      port: 4000
+      targetPort: 4000
+    # - name: iks-metric
+    #   protocol: TCP
+    #   port: 8490
+    #   targetPort: 8490
+      

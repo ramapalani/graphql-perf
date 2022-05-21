@@ -1,0 +1,32 @@
+# #Inspired from https://github.com/apollographql/router/blob/main/dockerfiles/Dockerfile.router
+
+ARG DEBUG_IMAGE
+# Build is required to extract the release files
+FROM --platform=linux/amd64 alpine:latest AS build
+
+ARG ROUTER_RELEASE=0.9.2
+
+# Pull release from GH
+ADD https://github.com/apollographql/router/releases/download/v${ROUTER_RELEASE}/router-${ROUTER_RELEASE}-x86_64-linux.tar.gz /tmp/router.tar.gz
+
+WORKDIR /tmp
+
+# router.tar.gz extracts to "dist"
+RUN tar xvzf router.tar.gz -C /
+
+# Make directories for config and schema
+RUN mkdir /dist/config && mkdir /dist/schema
+
+
+
+# Final image uses distroless
+FROM --platform=linux/amd64 gcr.io/distroless/cc-debian11${DEBUG_IMAGE}
+
+# Copy in the extracted/created files
+COPY --from=build --chown=root:root /dist /dist
+
+WORKDIR /dist
+
+# Default executable is the router
+ENTRYPOINT ["/dist/router"]
+CMD ["--config", "/dist/config/router.yaml", "--supergraph", "/etc/config/supergraph.graphql", "--log", "info" ]

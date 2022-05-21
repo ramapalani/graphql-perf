@@ -1,0 +1,37 @@
+server:
+  listen: 0.0.0.0:4000
+#   cors:
+#     origins:
+#       - https://studio.apollographql.com
+  introspection: true
+  landing_page: true
+headers:
+  all: # Header rules for all subgraphs
+    - propagate:
+        named: "x_latency"
+telemetry:
+  metrics:
+    prometheus:
+      # By setting this endpoint you enable the prometheus exporter
+      # All our endpoints exposed by plugins are namespaced by the name of the plugin
+      # Then to access to this prometheus endpoint, the full url path will be `/plugins/apollo.telemetry/prometheus`
+      enabled: true
+#   tracing:
+#     otlp:
+#       endpoint: collector:4317
+#       protocol: grpc
+#       # TODO: This needs to be a "duration"
+#       # timeout: 42
+# plugins:
+#   experimental.traffic_shaping:
+#     all:
+#       dedup: true # Enable dedup for all subgraphs.
+#     subgraphs: 
+#       products:
+#         dedup: false # Disable dedup for products.
+#   experimental.include_subgraph_errors:
+#     all: true # Propagate errors for all subraphs
+#     subgraphs: 
+#       products: false # Do not propagate errors from the products subgraph
+  # experimental.rhai:
+  #   filename: "config/header_customization.rhai"

@@ -1,27 +1,26 @@
-# A lot of files in /k8s folder are duplicated to save time, refactor this to use something like kustomize
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: apollo-gateway
+  name: apollo-router
   labels:
-    app: apollo-gateway
+    app: apollo-router
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: apollo-gateway
+      app: apollo-router
   template:
     metadata:
       labels:
-        app: apollo-gateway
+        app: apollo-router
     spec:
       containers:
-      - name: apollo-gateway
-        # image: ramapalaniappan436/apollo-gateway:0.42.0
-        image: docker.intuit.com/api-management/rapidxgqlrouter/service/rp/apollo-gateway:latest
+      - name: apollo-router
+        # image: ramapalaniappan436/apollo-router:0.42.0
+        image: docker.intuit.com/api-management/rapidxgqlrouter/service/rp/apollo-router:latest
         ports:
           - containerPort: 4000
-            name: apollo-gateway
+            name: apollo-router
             protocol: TCP
         readinessProbe:
           initialDelaySeconds: 60
@@ -40,13 +39,15 @@ spec:
           limits:
             cpu: "2"
             memory: "4Gi"
-        env:
-        - name: APOLLO_SCHEMA_CONFIG_EMBEDDED
-          value: 'true'
         volumeMounts:
         - name: supergraph
           mountPath: /etc/config
+        - name: routerconfig
+          mountPath: /dist/config
       volumes:
         - name: supergraph
           configMap:
             name: supergraph
+        - name: routerconfig
+          configMap:
+            name: routerconfig
