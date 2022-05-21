@@ -17,12 +17,12 @@ services:
       - "8080:8080"
   gatling-perf-test:
     container_name: gatling-perf-test
-    # build: ./gatling-perf-test  
+    build: ./gatling-perf-test  
     # image: ramapalaniappan436/gatling-perf-test:latest
-    image: docker.intuit.com/api-management/rapidxgqlrouter/service/rp/gatling-perf-test:debug
+    # image: docker.intuit.com/api-management/rapidxgqlrouter/service/rp/gatling-perf-test:debug
     environment: 
       - "BASE_URL=http://apollo-router:4000"
-      - "GRAPH_URI=\"\"" # No URI for router
+      - "GRAPH_URI=/" # root context is the URI for router
       - MIN_USER_COUNT=1
       - TEST_RAMP_SECONDS=1
       - TOTAL_TPS=1

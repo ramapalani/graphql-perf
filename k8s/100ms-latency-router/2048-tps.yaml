@@ -22,7 +22,7 @@ spec:
         - name: TEST_RAMP_SECONDS
           value: '60'
         - name: TOTAL_TPS
-          value: '32'
+          value: '512'
         - name: TEST_DURATION_SECONDS
           value: '600'
         - name: SINGLE_SUBGRAPH_100KB_LATENCY_MILLISECONDS

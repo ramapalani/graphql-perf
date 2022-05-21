@@ -16,7 +16,7 @@ spec:
         - name: BASE_URL
           value: http://apollo-router:4000
         - name: GRAPH_URI
-          value: ''
+          value: '/'
         - name: MIN_USER_COUNT
           value: '1'
         - name: TEST_RAMP_SECONDS
