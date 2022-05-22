@@ -2,7 +2,7 @@
 
 ## Perf Setup
 * Response Payload = 100kb
-More details are in this page: [Perf Setup](./perf-test-setup.MD)
+More details are in this page: [Perf Setup](../perf-test-setup.MD)
 
 ## Synthetic Latency of 100ms
 

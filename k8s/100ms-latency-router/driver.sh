@@ -3,7 +3,8 @@
 export DIR=`dirname $0`
 export BASE=${DIR}/..
 #TPS=(1 2 4 8 16 32 64 128)
-TPS=(1)
+TPS=(256 512 1024 2028 4056)
+
 
 for t in ${TPS[@]}; do
     echo "********* TPS=${t} **********"
