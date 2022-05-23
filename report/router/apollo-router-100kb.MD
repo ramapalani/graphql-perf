@@ -31,3 +31,5 @@ More details are in this page: [Perf Setup](../perf-test-setup.MD)
 
 | Transactions Per Second  | Client Response Time P95 (ms) | Supergraph Response Time P95 (ms) | Subgraph Response Time P95 (ms) | Time spent in Supergraph (ms) | CPU (millicore) | Memory (MB) | Screenshot |
 | --- | --- | --- | --- | --- | --- | --- | --- |
+| 256 | failed | 00:57
+| 128 | 47553 | 01:12

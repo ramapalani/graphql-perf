@@ -22,11 +22,11 @@ spec:
         - name: TEST_RAMP_SECONDS
           value: '60'
         - name: TOTAL_TPS
-          value: '256'
+          value: '8'
         - name: TEST_DURATION_SECONDS
           value: '600'
         - name: SINGLE_SUBGRAPH_100KB_LATENCY_MILLISECONDS
-          value: '100'
+          value: '5000'
         resources:
           requests:
             cpu: "4"

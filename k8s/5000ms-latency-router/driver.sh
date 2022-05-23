@@ -3,7 +3,7 @@
 export DIR=`dirname $0`
 export BASE=${DIR}/..
 #TPS=(1 2 4 8 16 32 64 128)
-TPS=(256) 
+TPS=(128)
 
 
 for t in ${TPS[@]}; do

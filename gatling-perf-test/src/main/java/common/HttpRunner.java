@@ -24,7 +24,8 @@ public class HttpRunner {
 
     public static HttpProtocolBuilder httpProtocol = http
             .baseUrl(BASE_URL)
-            .header("Content-Type", "application/json");
+            .header("Content-Type", "application/json")
+            .shareConnections();
 
     public static HttpRequestActionBuilder getHttpPostBuilder(String requestName, String requestBody) {
         return getHttpPostBuilder(requestName, requestBody, 0);

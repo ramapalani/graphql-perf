@@ -8,7 +8,7 @@ JAVA_OPTS="${JAVA_OPTS} -XX:+UnlockExperimentalVMOptions \
   -XshowSettings:vm"
 
 # use app dir for tmp dir
-JAVA_OPTS="${JAVA_OPTS} -Djava.io.tmpdir=/app/tmp"
+JAVA_OPTS="${JAVA_OPTS} -Djava.io.tmpdir=/app/tmp -Djava.net.preferIPv4Stack=true -Djava.net.preferIPv6Addresses=false"
 
 # Set these as environment values through container runtime
 MIN_USER_COUNT="${MIN_USER_COUNT:=1}"
