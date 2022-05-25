@@ -2,6 +2,8 @@
 
 ## Perf Setup
 * Response Payload = 100kb
+![Gateway Setup](./GatewaySetup.png)
+
 More details are in this page: [Perf Setup](../perf-test-setup.MD)
 
 ## Synthetic Latency of 100ms
