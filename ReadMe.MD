@@ -1,5 +1,6 @@
 # Performance Benchmark
-* [100KB Payload](./report/gateway/apollo-gateway-100kb.MD)
+* [Apollo-Gateway 100KB Payload](./report/gateway/apollo-gateway-100kb.MD)
+* [Apollo-Router 100KB Payload](./report/router/apollo-router-100kb.MD)
 
 # Run Locally
 
